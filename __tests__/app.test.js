@@ -58,4 +58,15 @@ describe('backend-hand-of-resources routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('creates a dog', async () => {
+    const expected = {
+      name: 'Remi',
+      age: 9,
+      color: 'Brown and Tan',
+    };
+    const res = await request(app).post('/api/v1/dogs').send(expected);
+
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
