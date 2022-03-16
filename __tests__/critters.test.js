@@ -36,4 +36,17 @@ describe('critter routes', () => {
 
     expect(res.body).toEqual({ ...expected });
   });
+
+  it('updates a critter by id', async () => {
+    const expected = {
+      id: expect.any(String),
+      name: 'Squirrel',
+      habitat: 'Under the Sea',
+    };
+    const res = await request(app)
+      .patch('/api/v1/critters/1')
+      .send({ habitat: 'Under the Sea' });
+
+    expect(res.body).toEqual(expected);
+  });
 });
