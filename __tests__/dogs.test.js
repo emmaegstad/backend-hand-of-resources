@@ -37,4 +37,25 @@ describe('dog routes', () => {
 
     expect(res.body).toEqual({ ...expected });
   });
+
+  it('updates a dog by id', async () => {
+    const expected = {
+      id: expect.any(String),
+      name: 'Levi',
+      age: 9,
+      color: 'Green',
+    };
+    const res = await request(app)
+      .patch('/api/v1/dogs/1')
+      .send({ color: 'Green' });
+
+    expect(res.body).toEqual(expected);
+  });
+
+  it('deletes a dog by id', async () => {
+    const expected = await Dog.findById(1);
+    const res = await request(app).delete(`/api/v1/dogs/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 });
