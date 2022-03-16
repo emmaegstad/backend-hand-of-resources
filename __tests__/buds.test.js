@@ -29,4 +29,11 @@ describe('bud routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('gets a bud by id', async () => {
+    const expected = await Bud.findById(1);
+    const res = await request(app).get(`/api/v1/buds/${expected.id}`);
+
+    expect(res.body).toEqual({ ...expected });
+  });
 });
