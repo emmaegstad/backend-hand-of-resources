@@ -36,4 +36,15 @@ describe('bud routes', () => {
 
     expect(res.body).toEqual({ ...expected });
   });
+
+  it('updates a bud by id', async () => {
+    const expected = {
+      id: expect.any(String),
+      name: 'Olivia',
+      age: 69,
+    };
+    const res = await request(app).patch('/api/v1/buds/1').send({ age: 69 });
+
+    expect(res.body).toEqual(expected);
+  });
 });
