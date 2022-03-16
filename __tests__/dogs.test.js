@@ -30,4 +30,11 @@ describe('dog routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('gets a dog by id', async () => {
+    const expected = await Dog.findById(1);
+    const res = await request(app).get(`/api/v1/dogs/${expected.id}`);
+
+    expect(res.body).toEqual({ ...expected });
+  });
 });
