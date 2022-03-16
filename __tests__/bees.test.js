@@ -49,4 +49,11 @@ describe('cat routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('deletes a bee by id', async () => {
+    const expected = await Bee.findById(1);
+    const res = await request(app).delete(`/api/v1/bees/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 });
