@@ -49,4 +49,11 @@ describe('critter routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('deletes a critter by id', async () => {
+    const expected = await Critter.findById(1);
+    const res = await request(app).delete(`/api/v1/critters/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 });
