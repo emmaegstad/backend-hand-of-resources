@@ -2,7 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-// const Critter = require('../lib/models/Critter');
+const Critter = require('../lib/models/Critter');
 
 describe('critter routes', () => {
   beforeEach(() => {
@@ -21,5 +21,12 @@ describe('critter routes', () => {
     const res = await request(app).post('/api/v1/critters').send(expected);
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
+
+  it('gets a list of critters', async () => {
+    const expected = await Critter.findAll();
+    const res = await request(app).get('/api/v1/critters');
+
+    expect(res.body).toEqual(expected);
   });
 });
