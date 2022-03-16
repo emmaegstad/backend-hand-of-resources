@@ -11,4 +11,15 @@ describe('backend-hand-of-resources routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('creates a cat', async () => {
+    const expected = {
+      name: 'Minnie',
+      age: 7,
+      color: 'Brown Tabby',
+    };
+    const res = await request(app).post('/api/v1/cats').send(expected);
+
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });
