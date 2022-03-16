@@ -29,4 +29,24 @@ describe('cat routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('gets a bee by id', async () => {
+    const expected = await Bee.findById(1);
+    const res = await request(app).get(`/api/v1/bees/${expected.id}`);
+
+    expect(res.body).toEqual({ ...expected });
+  });
+
+  it('updates a bee by id', async () => {
+    const expected = {
+      id: expect.any(String),
+      species: 'Honeybee',
+      size: 'Humongous',
+    };
+    const res = await request(app)
+      .patch('/api/v1/bees/1')
+      .send({ size: 'Humongous' });
+
+    expect(res.body).toEqual(expected);
+  });
 });
