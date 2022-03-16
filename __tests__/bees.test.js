@@ -19,5 +19,14 @@ describe('cat routes', () => {
       size: 'Extra Small',
     };
     const res = await request(app).post('/api/v1/bees').send(expected);
+
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
+
+  it('gets a list of bees', async () => {
+    const expected = await Bee.findAll();
+    const res = await request(app).get('/api/v1/bees');
+
+    expect(res.body).toEqual(expected);
   });
 });
