@@ -30,4 +30,32 @@ describe('backend-hand-of-resources routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('gets a cat by id', async () => {
+    const expected = await Cat.findById(1);
+    const res = await request(app).get(`/api/v1/cats/${expected.id}`);
+
+    expect(res.body).toEqual({ ...expected });
+  });
+
+  it('updates a cat by id', async () => {
+    const expected = {
+      id: expect.any(String),
+      name: 'Minnie',
+      age: 7,
+      color: 'rainbow',
+    };
+    const res = await request(app)
+      .patch('/api/v1/cats/1')
+      .send({ color: 'rainbow' });
+
+    expect(res.body).toEqual(expected);
+  });
+
+  it('deletes a cat by id', async () => {
+    const expected = await Cat.findById(1);
+    const res = await request(app).delete(`/api/v1/cats/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 });
