@@ -4,7 +4,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const Cat = require('../lib/models/Cat');
 
-describe('backend-hand-of-resources routes', () => {
+describe('cat routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
@@ -57,16 +57,5 @@ describe('backend-hand-of-resources routes', () => {
     const res = await request(app).delete(`/api/v1/cats/${expected.id}`);
 
     expect(res.body).toEqual(expected);
-  });
-
-  it('creates a dog', async () => {
-    const expected = {
-      name: 'Remi',
-      age: 9,
-      color: 'Brown and Tan',
-    };
-    const res = await request(app).post('/api/v1/dogs').send(expected);
-
-    expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
 });
