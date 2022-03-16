@@ -1,6 +1,6 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
-DROP TABLE IF EXISTS cats, dogs;
+DROP TABLE IF EXISTS cats, dogs, bees;
 
 CREATE TABLE cats (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -27,5 +27,18 @@ INSERT INTO
 VALUES
     ('Levi', 9, 'Black and White'),
     ('Charlie', 3, 'Blonde');
+
+CREATE TABLE bees (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    species TEXT NOT NULL,
+    size TEXT NOT NULL
+);
+
+INSERT INTO
+    bees (species, size)
+VALUES
+    ('Honeybee', 'Medium'),
+    ('Bumblebee', 'Large');
+
 
     
